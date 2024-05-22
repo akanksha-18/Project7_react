@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import './style.css'
 import { Link } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import {auth} from './Firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
@@ -13,9 +15,32 @@ const Login = () => {
       try{
          await signInWithEmailAndPassword(auth,email,password)
          console.log("Login successfully");
+        //  toast("Login successfully!");
+        toast.success('🦄 Login successfully!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          
+          });
       }catch(err){
         console.log(err);
-        alert('Login failed. Please check your credentials.');
+       
+        toast.error('Login failed. Please check your credentials.!', {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+          
+          });
       }
     }
 
@@ -33,6 +58,7 @@ const Login = () => {
          <button type='submit'>Login</button>
          <p>Don't Have account? <Link to="/">Signup</Link></p>
       </form>
+      <ToastContainer />
     </div>
   )
 }
